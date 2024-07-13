@@ -13,12 +13,36 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// instruct PostgreSQL to create a Todo table inside the 'affirmations' database
+// model profile {
+//   id      String @id @default(uuid())
+//   clerkId String @unique
+//   name    String @db.Text
 
+//   affGroups affgroup[]
+//   aff       aff[]
+// }
 
-// instruct PostgreSQL to create a Todo table inside the 'postgres_test' database set
-model Todo {
-    id Int @id @default(autoincrement())
-    title String
-    affirmations Json
-    completed Boolean @default(false)
+model affgroup {
+  id        String  @id @default(uuid())
+  // profile   profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  // profileId String
+  title   String
+  content Json
+
+  // affs aff[]
+
 }
+
+// model aff {
+//   id String @id @default(uuid())
+
+//   affGroupId String
+//   affGroup affgroup @relation(fields: [affGroupId], references: [id])
+
+//   profileId String
+//   profile   profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+//   content String @db.Text
+
+// }

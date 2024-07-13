@@ -1,0 +1,98 @@
+MY TESTING AREA - (affirmations)
+
+INSERT INTO "Todo"(title, affirmations) VALUES ('The Talisman', '{ "genres": ["Fiction", "Thriller", "Horror"], "authors": ["Stephen King", "Peter Straub"], "format": "hardcover"}');
+INSERT INTO "Todo"(title, affirmations) VALUES ('Siddhartha', '{ "genres": ["Fiction", "Spirituality"], "authors": ["Herman Hesse"], "format": "softcover"}');
+------
+*works*
+INSERT INTO affgroup (id, title, affirmations) VALUES ('1', 'Default Affirmations', '{ "affirmations": ["You got this", "You’ll figure it out", "You’re a smart cookie", "I believe in you", "Sucking at something is the first step towards being good at something"]}');
+
+INSERT INTO affgroup (id, title, affirmations) VALUES ('2', 'Positivity 2', '{ "affirmations": ["Struggling is part of learning", "Everything has cracks - that’s how the light gets in", "Mistakes don’t make you less capable", "We are all works in progress", "You are a capable human"]}');
+
+INSERT INTO affgroup (id, title, affirmations) VALUES ('3', 'Remember 3', '{ "affirmations": ["You know more than you think", "10x engineers are a myth", "If everything was easy you’d be bored", "I admire you for taking this on", "You’re resourceful and clever"]}');
+
+INSERT INTO affgroup (id, title, affirmations) VALUES ('4', 'Bounce Back 4', '{ "affirmations": ["You’ll find a way", "I know you’ll sort it out - that’s how the light gets in", "Struggling means you’re learning", "You’re doing a great job", "It’ll feel magical when it’s working"]}');
+
+2more^
+
+*try*FAILED
+INSERT INTO "AffirmationGroup" (id, title, affirmations) VALUES ('1', 'Default Affirmations', "{'["You got this", "You’ll figure it out", "You’re a smart cookie", "I believe in you", "Sucking at something is the first step towards being good at something"]'}");
+
+*works and updated* NO ids on affs not working
+INSERT INTO affgroup (id, title, affirmations) VALUES ('1', 'Default Affirmations', '[{"1": "You got this"}, {"2": "You’ll figure it out"}, {"3": "You’re a smart cookie"}, {"4": "I believe in you"}, {"5": "Sucking at something is the first step towards being good at something"}]');
+
+INSERT INTO affgroup (id, title, affirmations) VALUES ('2', 'Positivity 2', '[{"1": "Struggling is part of learning"}, {"2": "Everything has cracks - that’s how the light gets in"}, {"3": "Mistakes don’t make you less capable"}, {"4": "We are all works in progress"}, {"5": "You are a capable human"}]');
+
+INSERT INTO affgroup (id, title, affirmations) VALUES ('3', 'Remember 3', '[{"1": "You know more than you think"}, {"2": "10x engineers are a myth"}, {"3": "If everything was easy you’d be bored"}, {"4": "I admire you for taking this on"}, {"5": "You’re resourceful and clever"}]');
+
+INSERT INTO affgroup (id, title, affirmations) VALUES ('4', 'Bounce Back 4', '[{"1": "You’ll find a way"}, {"2": "I know you’ll sort it out - that’s how the light gets in"}, {"3": "Struggling means you’re learning"}, {"4": "You’re doing a great job"}, {"5": "It’ll feel magical when it’s working"}]');
+--------
+Database affirmations(profile, affgroup, aff):
+CREATE TABLE profile();
+CREATE TABLE affgroup();
+CREATE TABLE aff();
+INSERT INTO profile ("clerkId", id, name) VALUES ('1', '1', 'Bret');
+INSERT INTO profile ("clerkId", id, name) VALUES ('2', '2', 'Jesika');
+INSERT INTO profile ("clerkId", id, name) VALUES ('3', '3', 'Charlie');
+
+INSERT INTO affgroup (content, id, "profileId") VALUES ('Default Affirmations', '1', '1');
+INSERT INTO affgroup (content, id, "profileId") VALUES ('Remember', '2', '2');
+INSERT INTO affgroup (content, id, "profileId") VALUES ('Positivity', '3', '3');
+
+INSERT INTO aff ("affGroupId", content, id, "profileId") VALUES ('1', 'You got this', '1', '1');
+INSERT INTO aff ("affGroupId", content, id, "profileId") VALUES ('1', 'You’ll figure it out', '2', '1');
+INSERT INTO aff ("affGroupId", content, id, "profileId") VALUES ('1', 'You’re a smart cookie', '3', '1');
+INSERT INTO aff ("affGroupId", content, id, "profileId") VALUES ('1', 'I believe in you', '4', '1');
+INSERT INTO aff ("affGroupId", content, id, "profileId") VALUES ('1', 'Sucking at something is the first step towards being good at something', '5', '1');
+
+INSERT INTO aff ("affGroupId", content, id, "profileId") VALUES ('2', 'Struggling is part of learning', '6', '2');
+INSERT INTO aff ("affGroupId", content, id, "profileId") VALUES ('2', 'Everything has cracks - that’s how the light gets in', '7', '2');
+INSERT INTO aff ("affGroupId", content, id, "profileId") VALUES ('2', 'Mistakes don’t make you less capable', '8', '2');
+INSERT INTO aff ("affGroupId", content, id, "profileId") VALUES ('2', 'We are all works in progress', '9', '2');
+INSERT INTO aff ("affGroupId", content, id, "profileId") VALUES ('2', 'You are a capable human', '10', '2');
+
+INSERT INTO aff ("affGroupId", content, id, "profileId") VALUES ('3', 'You know more than you think', '11', '3');
+INSERT INTO aff ("affGroupId", content, id, "profileId") VALUES ('3', '10x engineers are a myth', '12', '3');
+INSERT INTO aff ("affGroupId", content, id, "profileId") VALUES ('3', 'If everything was easy you’d be bored', '13', '3');
+INSERT INTO aff ("affGroupId", content, id, "profileId") VALUES ('3', 'I admire you for taking this on', '14', '3');
+INSERT INTO aff ("affGroupId", content, id, "profileId") VALUES ('3', 'You’re resourceful and clever', '15', '3');
+
+testing db priming:
+SELECT content 
+FROM aff 
+WHERE "affGroupId" = '2';
+
+SELECT content, "affGroupId", id, "profileId" 
+FROM aff 
+WHERE "profileId" = '2';
+
+SELECT content
+FROM affgroup
+WHERE "profileId" = '2'; 
+
+clean up:
+DROP TABLE aff;
+DROP TABLE affgroup;
+DROP TABLE profile;
+
+test array:
+INSERT INTO affgroup (id, title, content) VALUES (1, 'Default Affirmations', '[{"id": "4a8c", "affirmation": "You got this"}, {"id": "456e", "affirmation": "You’ll figure it out"}]');
+INSERT INTO affgroup (id, title, content) VALUES (2, 'Remember', '[{"id": "b9b0", "affirmation": "Struggling is part of learning"}, {"id": "8985", "affirmation": "Everything has cracks - that’s how the light gets in"}]');
+INSERT INTO affgroup (id, title, content) VALUES (3, 'Positivity', '[{"id": "4662", "affirmation": "You know more than you think"}, {"id": "ba47", "affirmation": "10x engineers are a myth"}]');
+
+
+test:
+SELECT * FROM affgroup WHERE metadata->>'id' = 2;
+SELECT * FROM affgroup WHERE metadata @> '{"id": 2}';
+SELECT * FROM affgroup WHERE content @> '{"id":"2"}';
+
+SELECT * FROM affgroup WHERE content @> '[{"id": 2}]' :: jsonb;
+SELECT * FROM affgroup WHERE content <@ '[{"id": 2}]' :: jsonb;
+SELECT * FROM affgroup WHERE content #>> '[{"id": 2}]' :: jsonb;
+SELECT * FROM affgroup WHERE content #> '[{"id": 2}]' :: jsonb;
+SELECT * FROM affgroup WHERE content ->> '[{"id": 2}]' :: jsonb;
+SELECT * FROM affgroup WHERE content -> '[{"id": 2}]' :: jsonb;
+
+does select provide a diff way to access data? NOT EXACTLY
+make a conmponent to create state for title and content, then display. SUCCESS
+send to [id] page and have two update functions updateTitle() and updateAffirmation()
+

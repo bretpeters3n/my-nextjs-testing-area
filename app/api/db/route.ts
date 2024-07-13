@@ -4,19 +4,19 @@ import { NextResponse } from "next/server"
 
 export const POST = async (request: Request) => {
   const { title } = await request.json()
-  const entry = await prisma.todo.create({
+  const entry = await prisma.affgroup.create({
     data: {
       title: title,
     },
   })
 
-  revalidatePath("/todo")
+  revalidatePath("/db")
 
   return NextResponse.json({ data: entry })
 }
 
 export const GET = async (request: Request) => {
-  const getEntries = await prisma.todo.findMany()
+  const getEntries = await prisma.affgroup.findMany()
   console.log("getEntries: ")
   console.log({ getEntries })
   return NextResponse.json({ data: getEntries })

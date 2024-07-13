@@ -5,9 +5,10 @@ import { prisma } from "@/utils/db"
 
 import AddTodo from "@/components/AddTodo"
 import History from "@/components/History"
+import HistoryTitle from "@/components/HistoryTitle"
 
-const getData = async () => {
-  const todos = await prisma.todo.findMany({
+const getDataUser01 = async () => {
+  const content = await prisma.affgroup.findMany({
     // where: {
     //   NOT: {
     //     title: {
@@ -19,16 +20,16 @@ const getData = async () => {
       id: "asc",
     },
   })
-  return todos
+  return content
 }
 
-const ToDoPage = async () => {
-  const todos = await getData()
+const DbPage = async () => {
+  const content = await getDataUser01()
   return (
     <div className="">
       <AddTodo />
-      <History data={todos} />
+      <History data={content} />
     </div>
   )
 }
-export default ToDoPage
+export default DbPage
