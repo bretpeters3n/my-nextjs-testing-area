@@ -1,31 +1,30 @@
 "use client"
 
 import { useState } from "react"
-import { List } from "@/components//List"
+import { DndContext } from "@dnd-kit/core"
+import { SortableContext } from "@dnd-kit/sortable"
+import UserList from "@/components/UserList"
 
 const ReorderPage = () => {
-  const [itemsVertical, setItemsVertical] = useState([
+  const [items, setItems] = useState([
     { id: "item1" },
     { id: "item2" },
     { id: "item3" },
   ])
-  const [itemsHorizontal, setItemsHorizontal] = useState([
-    { id: "item4" },
-    { id: "item5" },
-    { id: "item6" },
-  ])
 
   return (
-    <div className="mx-4 mt-4">
-      <h1 className="text-3xl font-bold text-center">Reorder List Page</h1>
-      <h3>Drag items from one list to the other</h3>
-      <List
-        items={itemsHorizontal}
-        onItemsChange={setItemsHorizontal}
-        isHorizontal
-      />
-      <List items={itemsVertical} onItemsChange={setItemsVertical} />
-    </div>
+    <UserList />
+    // <div className="mx-4 mt-4">
+    //   <h1 className="text-3xl font-bold text-center">Reorder List Page</h1>
+    //   <h3>Drag items from one list to the other</h3>
+    //   <DndContext>
+    //     <SortableContext items={items}>
+    //       {items.map((item) => (
+    //         <div key={item.id}>{item.id}</div>
+    //       ))}
+    //     </SortableContext>
+    //   </DndContext>
+    // </div>
   )
 }
 
